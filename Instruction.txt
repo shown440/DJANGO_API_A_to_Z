@@ -1,0 +1,33 @@
+To setup Virtual Environment with Django and Python:
+====================================================
+  1. conda create --name myDjangoEnv django
+  2. conda create --name myDjangoEnv python=3.7.0
+
+To know about Status of Virtual Environment:
+============================================
+  3. conda info --envs  
+
+Activate Virtual Environment:
+============================
+  4. activate myDjangoEnv
+
+deactivate Virtual Environment:
+==============================
+  5. deactivate myDjangoEnv
+
+### Create Django Project ###:
+==============================
+  6. django-admin startproject my_hello_world
+
+### Start django app under Django Project ###:
+==============================================
+  7. python manage.py startapp my_hello_world
+  or, django-admin startapp basic_app
+
+### Run Django Project on SERVER ###:
+=====================================
+  8. python manage.py runserver
+
+Django.urls function Documentation:
+===================================
+  9. https://docs.djangoproject.com/en/2.0/ref/urls/#path

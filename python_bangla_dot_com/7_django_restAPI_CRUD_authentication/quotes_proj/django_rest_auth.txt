@@ -1,0 +1,18 @@
+END Points:
+===========
+    for login:
+    ==========
+        /rest-auth/login/
+    
+    for logout:
+    ===========
+        /rest-auth/logout/
+
+    for reset password:
+    ===================
+        /rest-auth/password/reset/
+        NB: but password reset korar jonn 1st a django te smtp email configuration korte hobe 
+
+    for confirm password:
+    =====================
+        /rest-auth/password/reset/confirm/

@@ -1,0 +1,6 @@
+1. Create VENV inside Vagrant-VM:
+=================================
+    mkvirtualenv profilesENV_api --python=python3
+
+    sudo python -m virtualenv profilesENV_api --python=python3
+

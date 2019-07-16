@@ -1,0 +1,6 @@
+# my.cnf for mysql database
+#[client]
+database = NAME
+user = USER
+password = PASSWORD
+default-character-set = utf8

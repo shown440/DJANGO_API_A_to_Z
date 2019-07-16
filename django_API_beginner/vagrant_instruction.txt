@@ -1,0 +1,27 @@
+###################################################################################################################
+#### For more Info about Vagrantfile conf : https://github.com/LondonAppDev/course-rest-api/blob/master/Vagrantfile
+###################################################################################################################
+
+1. Configure and Install Virtual Machine || Start the Server:
+=============================================================
+    vagrant up 
+
+2. connect with vagrant(VM):
+============================
+    vagrant ssh
+
+3. disconnect from vagrant(VM):
+===============================
+    exit
+
+4. Goto Vagrant folder of VM:
+================================
+    cd /vagrant
+
+5. to see all folders & files of current directory( without hidden files):
+==========================================================================
+    ls
+
+6. to see all folders & files of current directory( with hidden files):
+==========================================================================
+    ls -a

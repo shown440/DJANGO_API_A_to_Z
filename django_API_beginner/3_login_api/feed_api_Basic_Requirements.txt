@@ -1,0 +1,12 @@
+1. Creating new feed items
+	- Logged in user only
+
+2. Updating feed item
+	- Logged in user only
+
+3. Delete profile feed items
+	- Logged in user only
+
+4. Viewing other profile status updates/ other users feed items
+	- For All users
+

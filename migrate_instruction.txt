@@ -1,0 +1,25 @@
+#######################################
+#After complete model we have to migrate
+#######################################
+
+steps:
+======
+  1. python manage.py migrate
+  2. python manage.py makemigrations first_app
+  3. python manage.py migrate
+  4. python manage.py shell
+
+Then goto admin.py and Register your model:
+  admin.site.Register(#) #=model class
+
+Then go to console:
+  5. python manage.py createsuperuser
+
+Then add user_name, password and email:
+  user_name = shown
+  email = ahmed.shifullah@gmail.com
+  pass = shown12345
+
+Then STEPS:
+  6. python manage.py runserver
+  

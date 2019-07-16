@@ -1,0 +1,53 @@
+To setup Virtual Environment with Django and Python:
+====================================================
+  1. conda create --name myDjangoEnv django
+  2. conda create --name myDjangoEnv python=3.7.0
+
+To know about Status of Virtual Environment:
+============================================
+  3. conda info --envs
+
+Activate Virtual Environment:
+============================
+  4. activate myDjangoEnv
+
+deactivate Virtual Environment:
+============================
+  5. deactivate myDjangoEnv
+
+### Create Django Project ###:
+=============================
+  6. django-admin startproject first_project .
+
+### Start django app under Django Project ###:
+==============================================
+  7. python manage.py startapp first_app
+
+### Run Django Project on SERVER ###:
+=====================================
+  8. python manage.py runserver
+     python manage.py runserver 10.11.200.39:8000
+
+### Migrate Django Project on SERVER 1st Time ###:
+=================================================
+  9. python manage.py migrate
+
+### Migrate Django Project on SERVER when we add new Numbers ###:
+================================================================
+  10. python manage.py makemigrations
+
+### Create Super User in Django Project on SERVER ###:
+======================================================
+  11. python manage.py createsuperuser
+	==============================================
+	user : shown440
+	pass : Shown***123456789
+	email: ahmed.shifullah@gmail.com
+
+### Show Migrated file:
+=======================
+  1. python manage.py sqlmigrate [app_name] [migration_file_name]
+
+Django.urls function Documentation:
+===================================
+  9. https://docs.djangoproject.com/en/2.0/ref/urls/#path

@@ -1,0 +1,6 @@
+Django Permission Lebel:
+========================
+	3 Types:
+		1. Settings level permissions
+		2. View level permissions
+		3. Object level permissions

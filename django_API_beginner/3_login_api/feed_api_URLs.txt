@@ -1,0 +1,10 @@
+1. /api/feed/ [- list all feed items]
+	- GET (list feed items)
+	- POST (create feed item for logged in user)
+
+2. /api/feed/<feed_item_id> [- manage specific feed item] 
+	- GET (get the feed item)
+	- PUT/ PATCH (update feed item)
+	- DELETE (delete feed item)
+
+3.  

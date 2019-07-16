@@ -1,0 +1,13 @@
+1. Install ModHeader to your Mozilla Firefox OR Google Chrome
+
+2. Set Request Headers:
+	Name : Authorization
+	Value: Token [Token_Number]
+
+3. Set Filter Otherwise it will break other website:
+	Name : URL Patterns
+	value: url pattern like [http://127.0.0.1:8000/*]
+
+4. Then send request for authorization
+
+5. For logout just go to ModHeader and Uncheck the Authorization Box.

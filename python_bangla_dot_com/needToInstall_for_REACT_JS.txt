@@ -1,0 +1,14 @@
+For install react, At first we have to install Node.js Then we will install REACT.js using npm(Node Package Manager)
+
+Install react :
+===============
+	1. npm install -g create-react-app
+
+create REACT app:
+=================
+	2. create-react-app [quotes_react = application name]
+
+For call and get Response from API:
+===================================
+	3. npm install -g axios [install globally]
+	   npm install axios [install locally for current project]

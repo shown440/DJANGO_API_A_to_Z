@@ -1,0 +1,2 @@
+1. pip install bcrypt
+2. pip install django[argon2]
