@@ -1,0 +1,21 @@
+Go to the path, where the python app is running. Then Open cmd on that path and write--->
+	1. heroku login
+	2. heroku create [appname]	#To create app on heroku server
+	3. heroku apps	#To see the app list
+	
+	4. virtual\Scripts\pip freeze
+	5. virtual\Scripts\pip freeze > requirements.txt
+	6. then create file without extension, name as "Procfile".
+	   then write in the file => web: gunicorn [script_name]:app
+	7. then create "runtime.txt".
+	   then write in the file => python-3.7.2 [search and see for update runtime "heroku python runtime"]
+	
+	8. git init
+	9. git add . [add all file of current directory into git repository]
+	10. git commit -m "just uploaded"
+	11. heroku git:remote --app [app name where we can add repository]
+	
+	12. git config --global user.email "ahmed.shifullah@gmail.com" [if push app in heroku using git]
+	13. git config --global user.name "shown440" [if push app in heroku using git]
+
+	14.  git push heroku master  
