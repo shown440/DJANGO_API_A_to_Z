@@ -47,3 +47,7 @@ deactivate Virtual Environment:
 Django.urls function Documentation:
 ===================================
   9. https://docs.djangoproject.com/en/2.0/ref/urls/#path
+
+Django Built-in Serializer and Dump data:
+=========================================
+ 10. python manage.py dumpdata --format json --indent 4

@@ -1,0 +1,40 @@
+For POSTGRE SQL:
+===============
+	pip install --upgrade psycopg2
+
+Django install:
+===============
+	pip install --upgrade django
+
+Django REST Framework:
+======================
+	1. pip install --upgrade djangorestframework
+	2. pip install --upgrade django-rest-framework
+
+Django Rest Auth:
+=================
+	1. pip install --upgrade django-rest-auth (# this is used for user login & logout)
+		=> After installed we have to write into INSTALLED_APPS[
+			'rest_auth',
+		   ] 
+	2. pip install --upgrade django-allauth (# this is used for user registration)
+
+
+django-cors(Cross-Origin Resource Sharing )-headers for:
+========================================================
+	1. pip install --upgrade django-cors-headers
+
+Normal installation:
+-------------------
+
+Inside Virtual Environment:
+---------------------------
+	1. pip install --upgrade Faker
+	site: "faker.readthedocs.io/en/master/"
+
+# Python Imaging library:
+	Need to install for use Django ImageField:
+--------------------------------------------------
+	2. pip install --upgrade pillow
+
+
