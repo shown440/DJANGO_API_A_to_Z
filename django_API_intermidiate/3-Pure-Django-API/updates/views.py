@@ -1,14 +1,15 @@
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
+from django.views.generic import View
+import json
+
+# For serialize data
 from django.core.serializers import serialize
 
-from django.views.generic import View
-
+# Import JsonResponseMixin class from our project 'cfeapi_project->mixin.py'
 from cfeapi_project.mixins import JsonResponseMixin
-
+# Import Update from this directory = 'updates-> models.py'
 from .models import Update
-
-import json
 
 # Create your views here.
 
@@ -63,8 +64,9 @@ class JsonCBV2(JsonResponseMixin, View):
 class SerializedDetailView(View):
     def get(self, request, *args, **kwargs):
 
-        obj = Update.objects.get(id=1)
-        data = serialize("json", [obj, ], fields=('user', 'content'))
+        # obj = Update.objects.get(id=1)
+        data = Update.objects.get(id=4).serialize()
+        # data = serialize("json", [obj, ], fields=('user', 'content')) # , fields=('user', 'content')
 
         # data = {
         # "count": obj.user.username,
@@ -77,9 +79,11 @@ class SerializedDetailView(View):
 class SerializedListView(View):
     def get(self, request, *args, **kwargs):
 
+        
         qs = Update.objects.all()
-        data = serialize("json", qs, fields=('user', 'content'))
-        print(data)
+        data = Update.objects.all().serialize()
+        # data = serialize("json", qs, fields=('user', 'content')) # , fields=('user', 'content')
+        # print(data)
 
         # data = {
         # "count": obj.user.username,

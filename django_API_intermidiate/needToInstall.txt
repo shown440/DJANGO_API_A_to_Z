@@ -37,4 +37,8 @@ Inside Virtual Environment:
 --------------------------------------------------
 	2. pip install --upgrade pillow
 
+For Handelling requests:
+------------------------
+	3. pip install --upgrade requests
+
 

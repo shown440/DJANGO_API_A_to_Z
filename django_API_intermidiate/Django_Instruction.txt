@@ -51,6 +51,7 @@ Django.urls function Documentation:
 Django Built-in Serializer and Dump data:
 =========================================
  10. python manage.py dumpdata --format json --indent 4
+ 
  For Specific models:
  --------------------
  11. python manage.py dumpdata updates.Update --format json --indent 4
