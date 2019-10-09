@@ -16,8 +16,8 @@ def upload_update_image(instance, filename):
 class UpdateQuerySet(models.QuerySet):
 
     def serialize(self):
-        qs_list_with_values = list(self.values('user', 'content', 'image', )) # 'user', 'content', 'image', 'updated'
-        print(qs_list_with_values)
+        qs_list_with_values = list(self.values('id', 'user', 'content', 'image',)) # 'user', 'content', 'image', 'updated'
+        # print(qs_list_with_values)
         return json.dumps(qs_list_with_values)  # serialize("json", qs, fields=('user', 'content', 'image')) # , fields=('user', 'content', 'image')
 
 
