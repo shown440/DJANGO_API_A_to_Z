@@ -7,7 +7,7 @@ Serializers  ==> Validation like forms or Instead of form
 """
 
 
-class StatusSerializer(serializers.ModelSerializers):
+class StatusSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Status
