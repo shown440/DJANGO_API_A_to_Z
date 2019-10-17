@@ -20,5 +20,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # with and without end SLASH both are workable
     path('api/updates/', include('updates.api.urls')),
-    path('api/updates', include('updates.api.urls'))
+    path('api/updates', include('updates.api.urls')),
+
+    path('api/status/', include('status.api.urls')),
+    path('api/status', include('status.api.urls')),
 ]

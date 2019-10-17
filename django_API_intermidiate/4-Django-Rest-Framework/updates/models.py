@@ -36,6 +36,10 @@ class Update(models.Model):
 
     objects = UpdateManager()
 
+    class Meta:
+        # managed = False
+        db_table = "Update"
+
     def __str__(self):
         return self.content or ""
 

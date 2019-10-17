@@ -92,6 +92,18 @@ print(get_data_serializer.data)
 # print(obj.delete) # for delete the object
 
 
+"""
+Custom Serializer
+"""
+from rest_framework import serializers
 
+class CustomSerializer(serializers.Serializer):
+    content = serializers.CharField()
+    email = serializers.EmailField()
 
+data = {'email': 'abc@gmail.com', 'content': 'please delete me from the web application'}
 
+create_obj_serializer = CustomSerializer(data=data)
+create_obj_serializer.is_valid()
+create_obj = create_obj_serializer.save()
+print(create_obj)   

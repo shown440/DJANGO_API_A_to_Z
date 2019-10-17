@@ -34,5 +34,8 @@ class Status(models.Model):
         return str(self.content)[:50]
 
     class Meta:
+        # managed = False
+        db_table = "Status"
+        
         verbose_name = 'Status post'
         verbose_name_plural = 'Status posts'
