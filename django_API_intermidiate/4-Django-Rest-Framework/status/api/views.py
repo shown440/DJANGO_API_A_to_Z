@@ -65,24 +65,18 @@ class StatusDetailAPIView(generics.RetrieveAPIView):
     #     kw_id = kwargs.get('id')
     #     return Status.objects.get(id=kw_id)
 
+class StatusUpdateAPIView(generics.UpdateAPIView):
+    permission_classes          = []
+    authentication_classes      = []
 
+    queryset                    = Status.objects.all()
+    serializer_class            = StatusSerializer
+    # lookup_field                = "id" # "id" or "slug" #    if we want "id" or "slug" in url of urls.py
 
-# class StatusCreateView(generics.ListAPIView):
-#     permission_classes          = []
-#     authentication_classes      = []
+class StatusDeleteAPIView(generics.DestroyAPIView):
+    permission_classes          = []
+    authentication_classes      = []
 
-#     queryset                    = Status.objects.all()
-#     form_class                  = StatusForm
-
-
-# class StatusCreateAPIView():
-#     pass
-
-# class StatusDetailAPIView():
-#     pass
-
-# class StatusUpdateAPIView():
-#     pass
-
-# class StatusDeleteAPIView():
-#     pass
+    queryset                    = Status.objects.all()
+    serializer_class            = StatusSerializer
+    # lookup_field                = "id" # "id" or "slug" #    if we want "id" or "slug" in url of urls.py
