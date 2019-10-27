@@ -1,4 +1,4 @@
-from rest_framework import generics, mixins
+from rest_framework import generics
 
 # from rest_framework.generics import ListAPIView, CreateAPIView
 from rest_framework.views import APIView
@@ -26,11 +26,7 @@ from .serializers import StatusSerializer
 #         return Response(serializer.data)
 
 
-# CreateModelMixin ---- used for Handelling     POST data
-# UpdateModelMixin ---- used for Handelling     PUT data
-# DestroyModelMixin ---- used for Handelling    DELETE data
-
-class StatusAPIView(mixins.CreateModelMixin, generics.ListAPIView):
+class StatusAPIView(generics.ListAPIView):
     permission_classes          = []
     authentication_classes      = []
 
@@ -45,22 +41,17 @@ class StatusAPIView(mixins.CreateModelMixin, generics.ListAPIView):
             qs = qs.filter(content__icontains=query)
         return qs 
 
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
-
-    # def perform_create(self, serializer):
-    #     serializer.save(user=self.request.user)
-
-class StatusDetailAPIView(generics.RetrieveUpdateDestroyAPIView): # mixins.CreateModelMixin, 
+class StatusCreateAPIView(generics.CreateAPIView):
     permission_classes          = []
     authentication_classes      = []
 
     queryset                    = Status.objects.all()
     serializer_class            = StatusSerializer
 
+    # def perform_create(self, serializer):
+    #     serializer.save(user=self.request.user)
 
-
-class StatusDetailAPIView(mixins.DestroyModelMixin, mixins.UpdateModelMixin, generics.RetrieveAPIView): # mixins.CreateModelMixin, 
+class StatusDetailAPIView(generics.RetrieveAPIView):
     permission_classes          = []
     authentication_classes      = []
 
@@ -68,31 +59,24 @@ class StatusDetailAPIView(mixins.DestroyModelMixin, mixins.UpdateModelMixin, gen
     serializer_class            = StatusSerializer
     # lookup_field                = "id" # "id" or "slug" #    if we want "id" or "slug" in url of urls.py
 
-    # def post(self, request, *args, **kwargs):
-    #     return self.create(request, *args, **kwargs)
+    # This fun is also alternative id lookup_field
+    # def get_object(self, *args, **kwargs):
+    #     kwargs = self.kwargs
+    #     kw_id = kwargs.get('id')
+    #     return Status.objects.get(id=kw_id)
 
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
+class StatusUpdateAPIView(generics.UpdateAPIView):
+    permission_classes          = []
+    authentication_classes      = []
 
-    def patch(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
+    queryset                    = Status.objects.all()
+    serializer_class            = StatusSerializer
+    # lookup_field                = "id" # "id" or "slug" #    if we want "id" or "slug" in url of urls.py
 
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
+class StatusDeleteAPIView(generics.DestroyAPIView):
+    permission_classes          = []
+    authentication_classes      = []
 
-
-# class StatusUpdateAPIView(generics.UpdateAPIView):
-#     permission_classes          = []
-#     authentication_classes      = []
-
-#     queryset                    = Status.objects.all()
-#     serializer_class            = StatusSerializer
-#     # lookup_field                = "id" # "id" or "slug" #    if we want "id" or "slug" in url of urls.py
-
-# class StatusDeleteAPIView(generics.DestroyAPIView):
-#     permission_classes          = []
-#     authentication_classes      = []
-
-#     queryset                    = Status.objects.all()
-#     serializer_class            = StatusSerializer
-#     # lookup_field                = "id" # "id" or "slug" #    if we want "id" or "slug" in url of urls.py
+    queryset                    = Status.objects.all()
+    serializer_class            = StatusSerializer
+    # lookup_field                = "id" # "id" or "slug" #    if we want "id" or "slug" in url of urls.py
