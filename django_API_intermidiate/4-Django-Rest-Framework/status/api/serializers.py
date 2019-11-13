@@ -17,6 +17,7 @@ class StatusSerializer(serializers.ModelSerializer):
             'content',
             'image'
         ]
+        read_only_fields = ['user']
 
     #  format of validate fields function is like below:
     # def validate_<field>(self, value):

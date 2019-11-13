@@ -1,3 +1,7 @@
+#####################################################
+###	Anaconda Environment
+#####################################################
+
 To setup Virtual Environment with Django and Python:
 ====================================================
   1. conda create --name myDjangoEnv django
@@ -15,6 +19,24 @@ deactivate Virtual Environment:
 ============================
   5. deactivate myDjangoEnv
 
+###################################################
+###	Virtual Env
+###################################################
+
+Create Virtual Environment:
+=============================
+	python -m venv DjangoEnv
+
+Activate Virtual Environment:
+=============================
+	DjangoEnv\Scripts\activate
+
+Deactivate Virtual Environment:
+=============================
+	DjangoEnv\Scripts\deactivate
+
+
+#############################
 ### Create Django Project ###:
 =============================
   6. django-admin startproject first_project .
@@ -41,13 +63,18 @@ deactivate Virtual Environment:
   11. python manage.py createsuperuser
 	==============================================
 	user : shown440
-	pass : Shown***123456789
+	pass : admin-12345
 	email: ahmed.shifullah@gmail.com
-
-### Show Migrated file:
-=======================
-  1. python manage.py sqlmigrate [app_name] [migration_file_name]
 
 Django.urls function Documentation:
 ===================================
   9. https://docs.djangoproject.com/en/2.0/ref/urls/#path
+
+Django Built-in Serializer and Dump data:
+=========================================
+ 10. python manage.py dumpdata --format json --indent 4
+ 
+ For Specific models:
+ --------------------
+ 11. python manage.py dumpdata updates.Update --format json --indent 4
+

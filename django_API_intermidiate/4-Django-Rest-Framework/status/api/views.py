@@ -1,7 +1,17 @@
-from rest_framework import generics, mixins
+########### Mixin models portion ##########################
+from rest_framework import mixins
+
+########### View portion ##########################
 # from rest_framework.generics import ListAPIView, CreateAPIView
+from rest_framework import generics
 from rest_framework.views import APIView
-from rest_framework.response import Response
+# from rest_framework.response import Response
+
+########### Permission portion ####################
+from rest_framework import permissions
+
+########### Authentication portion ################
+from rest_framework.authentication import SessionAuthentication
 
 from django.shortcuts import get_object_or_404
 import json 
@@ -26,13 +36,37 @@ def is_json(json_data):
 # UpdateModelMixin ---- used for Handelling     PUT data
 # DestroyModelMixin ---- used for Handelling    DELETE data
 
+class StatusAPIDetailView(mixins.UpdateModelMixin,
+                    mixins.DestroyModelMixin,
+                    generics.RetrieveAPIView):
+    permission_classes          = [permissions.IsAuthenticatedOrReadOnly]     #[ IsAuthenticated, IsAuthenticatedOrReadOnly ]
+    # authentication_classes      = [SessionAuthentication]
+
+    # queryset                    = Status.objects.all()
+    serializer_class            = StatusSerializer
+    queryset                    = Status.objects.all()
+    # lookup_field                = "id"
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+    # def perform_create(self, serializer):
+    #     serializer.save(user=self.request.user)
+
+
 class StatusAPIView(mixins.CreateModelMixin,
-                    mixins.RetrieveModelMixin,
-                    mixins.UpdateModelMixin,
-                    mixins.DestroyModelMixin,  
+                    # mixins.RetrieveModelMixin,
+                    # mixins.UpdateModelMixin,
+                    # mixins.DestroyModelMixin,  
                     generics.ListAPIView):
-    permission_classes          = []
-    authentication_classes      = []
+    permission_classes          = [permissions.IsAuthenticatedOrReadOnly]     #[ IsAuthenticated, IsAuthenticatedOrReadOnly ]
+    # authentication_classes      = [SessionAuthentication]
 
     # queryset                    = Status.objects.all()
     serializer_class            = StatusSerializer
@@ -40,6 +74,7 @@ class StatusAPIView(mixins.CreateModelMixin,
 
     def get_queryset(self):
         request     = self.request
+        print(request.user)
         qs          = Status.objects.all()
         query       = request.GET.get('q')
         # print("$$$$$$$$$$$$$$$$$$$$$$> ",query)
@@ -47,88 +82,131 @@ class StatusAPIView(mixins.CreateModelMixin,
             qs = qs.filter(content__icontains=query)
         return qs 
 
-    def get_object(self):
-        request             = self.request
-        passed_id           = request.GET.get('id', None) or self.passed_id
-        queryset            = self.get_queryset()
-        obj                 = None
-
-        if passed_id is not None:
-            obj             = get_object_or_404(queryset, id=passed_id)
-            self.check_object_permissions(request, obj)
-        return obj
-
-    # Now destroy is no need for delete
-    # def perform_destroy(self, instance):
-    #     if instance in not None:
-    #         return instance.delete()
-    #     return None
-
-
-    def get(self, request, *args, **kwargs):
-        url_passed_id           = request.GET.get('id', None)
-        json_data               = {}
-        body_                   = request.body
-        if is_json(body_):
-            json_data               = json.loads(request.body)
-        new_passed_id           = json_data.get("id", None)
-        # print(request.body)  # ==> Used for passed data using BODY
-        # request.data  # ==> Used for passed data using DATA
-
-        passed_id = url_passed_id or new_passed_id or None
-        self.passed_id = passed_id
-
-        if passed_id is not None: # or passed_id is not "":
-            return self.retrieve(request, *args, **kwargs) # This retrieve method will call "def get_object(self): Method"
-        return super().get(request, *args, **kwargs)
-
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
+    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
-    def put(self, request, *args, **kwargs):
-        url_passed_id           = request.GET.get('id', None)
-        json_data               = {}
-        body_                   = request.body
-        if is_json(body_):
-            json_data               = json.loads(request.body)
-        new_passed_id           = json_data.get("id", None)
-        # print(request.body)  # ==> Used for passed data using BODY
-        # request.data  # ==> Used for passed data using DATA
 
-        passed_id = url_passed_id or new_passed_id or None
-        self.passed_id = passed_id
-        return self.update(request, *args, **kwargs)
+# class StatusAPIView(mixins.CreateModelMixin,
+#                     mixins.RetrieveModelMixin,
+#                     mixins.UpdateModelMixin,
+#                     mixins.DestroyModelMixin,  
+#                     generics.ListAPIView):
+#     permission_classes          = []
+#     authentication_classes      = []
 
-    def patch(self, request, *args, **kwargs):
-        url_passed_id           = request.GET.get('id', None)
-        json_data               = {}
-        body_                   = request.body
-        if is_json(body_):
-            json_data               = json.loads(request.body)
-        new_passed_id           = json_data.get("id", None)
-        # print(request.body)  # ==> Used for passed data using BODY
-        # request.data  # ==> Used for passed data using DATA
+#     # queryset                    = Status.objects.all()
+#     serializer_class            = StatusSerializer
+#     passed_id                   = None
 
-        passed_id = url_passed_id or new_passed_id or None
-        self.passed_id = passed_id
-        return self.update(request, *args, **kwargs)
+#     def get_queryset(self):
+#         request     = self.request
+#         qs          = Status.objects.all()
+#         query       = request.GET.get('q')
+#         # print("$$$$$$$$$$$$$$$$$$$$$$> ",query)
+#         if query is not None:
+#             qs = qs.filter(content__icontains=query)
+#         return qs 
 
-    def delete(self, request, *args, **kwargs):
-        url_passed_id           = request.GET.get('id', None)
-        json_data               = {}
-        body_                   = request.body
-        if is_json(body_):
-            json_data               = json.loads(request.body)
-        new_passed_id           = json_data.get("id", None)
-        # print(request.body)  # ==> Used for passed data using BODY
-        # request.data  # ==> Used for passed data using DATA
+#     def get_object(self):
+#         request             = self.request
+#         passed_id           = request.GET.get('id', None) or self.passed_id
+#         queryset            = self.get_queryset()
+#         obj                 = None
 
-        passed_id = url_passed_id or new_passed_id or None
-        self.passed_id = passed_id
-        return self.destroy(request, *args, **kwargs)
+#         if passed_id is not None:
+#             obj             = get_object_or_404(queryset, id=passed_id)
+#             self.check_object_permissions(request, obj)
+#         return obj
 
-    # def perform_create(self, serializer):
-    #     serializer.save(user=self.request.user)
+#     # Now destroy is no need for delete
+#     # def perform_destroy(self, instance):
+#     #     if instance in not None:
+#     #         return instance.delete()
+#     #     return None
+
+
+#     def get(self, request, *args, **kwargs):
+#         url_passed_id           = request.GET.get('id', None)
+#         json_data               = {}
+#         body_                   = request.body
+#         if is_json(body_):
+#             json_data               = json.loads(request.body)
+#         new_passed_id           = json_data.get("id", None)
+#         # print(request.body)  # ==> Used for passed data using BODY
+#         # request.data  # ==> Used for passed data using DATA
+
+#         passed_id = url_passed_id or new_passed_id or None
+#         self.passed_id = passed_id
+
+#         if passed_id is not None: # or passed_id is not "":
+#             return self.retrieve(request, *args, **kwargs) # This retrieve method will call "def get_object(self): Method"
+#         return super().get(request, *args, **kwargs)
+
+#     def post(self, request, *args, **kwargs):
+#         return self.create(request, *args, **kwargs)
+
+#     def put(self, request, *args, **kwargs):
+#         url_passed_id           = request.GET.get('id', None)
+#         json_data               = {}
+#         body_                   = request.body
+#         if is_json(body_):
+#             json_data               = json.loads(request.body)
+#         new_passed_id           = json_data.get("id", None)
+#         # print(request.body)  # ==> Used for passed data using BODY
+#         # request.data  # ==> Used for passed data using DATA
+#         print(request.data)
+#         requested_id = None # request.data.get('id')
+
+#         passed_id = url_passed_id or new_passed_id or None or requested_id
+#         self.passed_id = passed_id
+#         return self.update(request, *args, **kwargs)
+
+#     def patch(self, request, *args, **kwargs):
+#         url_passed_id           = request.GET.get('id', None)
+#         json_data               = {}
+#         body_                   = request.body
+#         if is_json(body_):
+#             json_data               = json.loads(request.body)
+#         new_passed_id           = json_data.get("id", None)
+#         # print(request.body)  # ==> Used for passed data using BODY
+#         # request.data  # ==> Used for passed data using DATA
+
+#         passed_id = url_passed_id or new_passed_id or None
+#         self.passed_id = passed_id
+#         return self.update(request, *args, **kwargs)
+
+#     def delete(self, request, *args, **kwargs):
+#         url_passed_id           = request.GET.get('id', None)
+#         json_data               = {}
+#         body_                   = request.body
+#         if is_json(body_):
+#             json_data               = json.loads(request.body)
+#         new_passed_id           = json_data.get("id", None)
+#         # print(request.body)  # ==> Used for passed data using BODY
+#         # request.data  # ==> Used for passed data using DATA
+
+#         passed_id = url_passed_id or new_passed_id or None
+#         self.passed_id = passed_id
+#         return self.destroy(request, *args, **kwargs)
+
+#     # def perform_create(self, serializer):
+#     #     serializer.save(user=self.request.user)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

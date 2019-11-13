@@ -16,8 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# I'll put it into my account app -> urls.py later
+from rest_framework_jwt.views import refresh_jwt_token, obtain_jwt_token
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # URL's for JWT Authentication
+    path('api/auth/jwt/', obtain_jwt_token),
+    path('api/auth/jwt/refresh/', refresh_jwt_token),
+
     # with and without end SLASH both are workable
     path('api/updates/', include('updates.api.urls')),
     path('api/updates', include('updates.api.urls')),

@@ -1,3 +1,7 @@
+#####################################################
+###	Anaconda Environment
+#####################################################
+
 To setup Virtual Environment with Django and Python:
 ====================================================
   1. conda create --name myDjangoEnv django
@@ -15,6 +19,24 @@ deactivate Virtual Environment:
 ============================
   5. deactivate myDjangoEnv
 
+###################################################
+###	Virtual Env
+###################################################
+
+Create Virtual Environment:
+=============================
+	python -m venv DjangoEnv
+
+Activate Virtual Environment:
+=============================
+	DjangoEnv\Scripts\activate
+
+Deactivate Virtual Environment:
+=============================
+	DjangoEnv\Scripts\deactivate
+
+
+#############################
 ### Create Django Project ###:
 =============================
   6. django-admin startproject first_project .
@@ -51,3 +73,8 @@ Django.urls function Documentation:
 Django Built-in Serializer and Dump data:
 =========================================
  10. python manage.py dumpdata --format json --indent 4
+ 
+ For Specific models:
+ --------------------
+ 11. python manage.py dumpdata updates.Update --format json --indent 4
+
