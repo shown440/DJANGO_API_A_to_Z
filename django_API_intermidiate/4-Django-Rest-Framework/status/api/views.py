@@ -9,6 +9,8 @@ from rest_framework.views import APIView
 
 ########### Permission portion ####################
 from rest_framework import permissions
+from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.models import User # add, change, delete, view
 
 ########### Authentication portion ################
 from rest_framework.authentication import SessionAuthentication
@@ -36,23 +38,29 @@ def is_json(json_data):
 # UpdateModelMixin ---- used for Handelling     PUT data
 # DestroyModelMixin ---- used for Handelling    DELETE data
 
+# @permission_required
+# user = get_object_or_404(User, pk=user.id)
+# @user.has_perm('status.delete_Status')
 class StatusAPIDetailView(mixins.UpdateModelMixin,
                     mixins.DestroyModelMixin,
                     generics.RetrieveAPIView):
-    permission_classes          = [permissions.IsAuthenticatedOrReadOnly]     #[ IsAuthenticated, IsAuthenticatedOrReadOnly ]
-    # authentication_classes      = [SessionAuthentication]
+    permission_classes          = [permissions.IsAuthenticated]     #[ IsAuthenticated, IsAuthenticatedOrReadOnly ]
+    authentication_classes      = [SessionAuthentication]
 
     # queryset                    = Status.objects.all()
     serializer_class            = StatusSerializer
     queryset                    = Status.objects.all()
     # lookup_field                = "id"
 
+    # @permission_required
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
 
+    # @permission_required
     def patch(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
-
+    
+    # @permission_required
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
@@ -60,13 +68,14 @@ class StatusAPIDetailView(mixins.UpdateModelMixin,
     #     serializer.save(user=self.request.user)
 
 
+# @permission_required
 class StatusAPIView(mixins.CreateModelMixin,
                     # mixins.RetrieveModelMixin,
                     # mixins.UpdateModelMixin,
                     # mixins.DestroyModelMixin,  
                     generics.ListAPIView):
-    permission_classes          = [permissions.IsAuthenticatedOrReadOnly]     #[ IsAuthenticated, IsAuthenticatedOrReadOnly ]
-    # authentication_classes      = [SessionAuthentication]
+    permission_classes          = [permissions.IsAuthenticated]     #[ IsAuthenticated, IsAuthenticatedOrReadOnly ]
+    authentication_classes      = [SessionAuthentication]
 
     # queryset                    = Status.objects.all()
     serializer_class            = StatusSerializer
@@ -81,10 +90,10 @@ class StatusAPIView(mixins.CreateModelMixin,
         if query is not None:
             qs = qs.filter(content__icontains=query)
         return qs 
-
+    # @permission_required
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
-    
+    # @permission_required
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 

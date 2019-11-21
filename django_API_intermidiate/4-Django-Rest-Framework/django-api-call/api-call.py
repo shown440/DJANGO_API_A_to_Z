@@ -13,15 +13,20 @@ image_path = os.path.join(os.getcwd(), "slack-logo.png")
 #####  djangorestframework-jwt Authentication
 ######################################################
 
-AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/"   #jwt/"
+AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/register/"   #jwt/"
 REFRESH_ENDPOINT = AUTH_ENDPOINT + "refresh/"
-
+# token1 = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6InNoaWZ1bGxhaCIsImV4cCI6MTU3NDE1NjYwMiwiZW1haWwiOiJhaG1lZC5zaGlmdWxsYWhAZ21haWwuY29tIiwib3JpZ19pYXQiOjE1NzQxNTYzMDJ9.HdcuWs6DsArlYL-8K3am4J1CAeC8FCSxRs8N-rMyGAs"
 headers = {
     "content-type": "application/json"
+    # "Authorization": "JWT " + token1
+    # "Authorization": "JWT " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6InNob3duNDQwIiwiZXhwIjoxNTczOTg1MjM4LCJlbWFpbCI6ImFiY0BnbWFpbC5jb20iLCJvcmlnX2lhdCI6MTU3Mzk4NDkzOH0.TmrP78_wGjQ4bUpL-wEHP3eYp51ZcwFXHa9x5g1ua4s"
 }
 data = {
-    "username": "shown440x",  #shifullah", shown440
-    "password": "admin-12345"
+    "username": "shifullah5",  #shifullah", shown440
+    "email": "shifullah2@gmail.com",
+    "password": "admin-12345",
+    "password2": "admin-12345"
+
 }
 r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)
 # print(r.json())

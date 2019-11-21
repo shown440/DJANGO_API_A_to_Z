@@ -19,11 +19,12 @@ from django.urls import path, include
 # I'll put it into my account app -> urls.py later
 from rest_framework_jwt.views import refresh_jwt_token, obtain_jwt_token
 
-from .views import AuthView
+from .views import AuthAPIView, RegisterAPIView
 
 urlpatterns = [
     # Define root view
-    path('', AuthView.as_view()),
+    path('', AuthAPIView.as_view()),
+    path('register/', RegisterAPIView.as_view()),
 
     # URL's for JWT Authentication
     path('jwt/', obtain_jwt_token),
