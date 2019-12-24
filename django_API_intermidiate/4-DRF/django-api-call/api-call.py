@@ -4,10 +4,7 @@ import os
 
 
 
-END_POINT = "http://127.0.0.1:8000/api/status/"
-
 image_path = os.path.join(os.getcwd(), "slack-logo.png")
-
 
 ######################################################
 #####  djangorestframework-jwt Authentication
@@ -15,28 +12,44 @@ image_path = os.path.join(os.getcwd(), "slack-logo.png")
 
 ##################################################
 ### User login and jwt return both combindly
-AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/register/"   #jwt/"
+#################################################
+AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/"   #jwt/"
 REFRESH_ENDPOINT = AUTH_ENDPOINT + "refresh/"
-# token1 = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6InNoaWZ1bGxhaCIsImV4cCI6MTU3NDE1NjYwMiwiZW1haWwiOiJhaG1lZC5zaGlmdWxsYWhAZ21haWwuY29tIiwib3JpZ19pYXQiOjE1NzQxNTYzMDJ9.HdcuWs6DsArlYL-8K3am4J1CAeC8FCSxRs8N-rMyGAs"
+
 headers = {
-    "content-type": "application/json",
-    # "Authorization": "JWT " + token1
-    "Authorization": "JWT " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2MywidXNlcm5hbWUiOiJzaGlmdWxsYWg3IiwiZXhwIjoxNTc0Nzc0ODI3LCJlbWFpbCI6InNoaWZ1bGxhaDVAZ21haWwuY29tIiwib3JpZ19pYXQiOjE1NzQ3NzQ1Mjd9.qCtiC64bVJH_DMG5DcacabCB0EdRCSbTX4e9CqmBOn4"
+    "Content-Type": "application/json"
 }
 data = {
-    "username": "shifullah8",  #shifullah", shown440
-    "email": "shifullah5@gmail.com",
-    "password": "admin-12345",
-    "password2": "admin-12345"
-
+    "username": "shifullah",  #shifullah", shown440
+    "password": "admin-12345"
 }
 r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)
 # print(r.json())
-token = r.json()#["token"]
-print(token)
+token = r.json()["token"]
+# print(token)
+
+
+END_POINT = "http://127.0.0.1:8000/api/status/41/"
+headers2 = {
+    # "Content-Type": "application/json",
+    "Authorization": "JWT " + token
+}
+data2 = {
+    "content": "Newwwwwwwwwwwww Contentttttttttttttttttt Postttttttttt"  #shifullah", shown440
+}
+with open(image_path, 'rb') as image:
+    file_data = {
+        'image': image
+    }
+    r2 = requests.put(END_POINT, data=data2, headers=headers2, files=file_data)
+    print(r2.text)
+
+
 
 # ####################################################
 # ### User create and jwt return both combindly
+######################################################
+# END_POINT = "http://127.0.0.1:8000/api/status/"
 # AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/register/"   #jwt/"
 # REFRESH_ENDPOINT = AUTH_ENDPOINT + "refresh/"
 # # token1 = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6InNoaWZ1bGxhaCIsImV4cCI6MTU3NDE1NjYwMiwiZW1haWwiOiJhaG1lZC5zaGlmdWxsYWhAZ21haWwuY29tIiwib3JpZ19pYXQiOjE1NzQxNTYzMDJ9.HdcuWs6DsArlYL-8K3am4J1CAeC8FCSxRs8N-rMyGAs"
@@ -56,6 +69,7 @@ print(token)
 # # print(r.json())
 # token = r.json()#["token"]
 # print(token)
+######################################################################################################
 
 # refresh_data = {
 #     "token": token

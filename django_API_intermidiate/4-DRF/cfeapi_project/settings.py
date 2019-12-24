@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     ### 3rd Party Application ###
     ###### Django-Rest-Framework ###
     'rest_framework',
@@ -169,11 +169,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Own MEDIA FILES 
+# Own MEDIA FILES
 MEDIA_ROOT      = os.path.join(BASE_DIR, 'static-server', 'media-root') # os.path.dirname(BASE_DIR)
 MEDIA_URL       = '/media/'
 
 # Imported everything form my customize configuration folder --> "restconfig"
 from cfeapi_project.restconf.main import *
-
-

@@ -45,7 +45,7 @@ def is_json(json_data):
 class StatusAPIDetailView(mixins.UpdateModelMixin,
                     mixins.DestroyModelMixin,
                     generics.RetrieveAPIView):
-    permission_classes          = [permissions.IsAuthenticated, IsOwnerOrReadOnly]     #[ IsAuthenticated, IsAuthenticatedOrReadOnly ]
+    permission_classes          = [permissions.IsAuthenticated, IsOwnerOrReadOnly]     #[ IsOwnerOrReadOnly, IsAuthenticated, IsAuthenticatedOrReadOnly ]
     authentication_classes      = [SessionAuthentication]
 
     # queryset                    = Status.objects.all()
@@ -53,15 +53,12 @@ class StatusAPIDetailView(mixins.UpdateModelMixin,
     queryset                    = Status.objects.all()
     # lookup_field                = "id"
 
-    # @permission_required
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
 
-    # @permission_required
     def patch(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
     
-    # @permission_required
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
