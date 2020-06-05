@@ -6,7 +6,7 @@ chardet==3.0.4
 cx-Oracle==7.2.0
 defusedxml==0.6.0
 dj-database-url==0.5.0
-Django==2.2.3
+Django==2.2.13
 django-admin-sortable==2.1.17
 django-allauth==0.39.1
 django-bootstrap3==11.1.0
